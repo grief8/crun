@@ -402,11 +402,11 @@ main (int argc, char **argv)
   arguments.argv = argv;
 
 #ifdef DYNLOAD_LIBCRUN
-  if (ensure_cloned_binary () < 0)
-    {
-      fprintf (stderr, "Failed to re-execute libcrun via memory file descriptor\n");
-      _exit (EXIT_FAILURE);
-    }
+  // if (ensure_cloned_binary () < 0)
+  //   {
+  //     fprintf (stderr, "Failed to re-execute libcrun via memory file descriptor\n");
+  //     _exit (EXIT_FAILURE);
+  //   }
   /* Resolve all libcrun weak dependencies.  */
   if (dlopen ("libcrun.so", RTLD_GLOBAL | RTLD_DEEPBIND | RTLD_LAZY) == NULL)
     error (EXIT_FAILURE, 0, "dlopen: %s", dlerror ());

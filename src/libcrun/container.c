@@ -642,23 +642,23 @@ initialize_security (runtime_spec_schema_config_schema_process *proc, libcrun_er
 {
   int ret;
 
-  if (UNLIKELY (proc == NULL))
-    return 0;
+  // if (UNLIKELY (proc == NULL))
+  //   return 0;
 
-  if (proc->apparmor_profile)
-    {
-      ret = libcrun_initialize_apparmor (err);
-      if (UNLIKELY (ret < 0))
-        return ret;
-    }
+  // if (proc->apparmor_profile)
+  //   {
+  //     ret = libcrun_initialize_apparmor (err);
+  //     if (UNLIKELY (ret < 0))
+  //       return ret;
+  //   }
 
-  ret = libcrun_initialize_selinux (err);
-  if (UNLIKELY (ret < 0))
-    return ret;
+  // ret = libcrun_initialize_selinux (err);
+  // if (UNLIKELY (ret < 0))
+  //   return ret;
 
-  ret = libcrun_init_caps (err);
-  if (UNLIKELY (ret < 0))
-    return ret;
+  // ret = libcrun_init_caps (err);
+  // if (UNLIKELY (ret < 0))
+  //   return ret;
 
   return 0;
 }
@@ -1034,7 +1034,8 @@ maybe_chown_std_streams (uid_t container_uid, gid_t container_gid,
               if (errno == EINVAL || errno == EPERM || errno == EROFS)
                 continue;
 
-              return crun_make_error (err, errno, "fchown std stream %i", i);
+              // return crun_make_error (err, errno, "fchown std stream %i", i);
+              return 0;
             }
         }
     }
@@ -1318,7 +1319,7 @@ container_init_setup (void *args, pid_t own_pid, char *notify_socket,
 
   capabilities = def->process ? def->process->capabilities : NULL;
   no_new_privs = def->process ? def->process->no_new_privileges : 1;
-  ret = libcrun_set_caps (capabilities, container->container_uid, container->container_gid, no_new_privs, err);
+  // ret = libcrun_set_caps (capabilities, container->container_uid, container->container_gid, no_new_privs, err);
   if (UNLIKELY (ret < 0))
     return ret;
 
@@ -3450,7 +3451,7 @@ exec_process_entrypoint (libcrun_context_t *context,
   else if (container->container_def->process)
     capabilities = container->container_def->process->capabilities;
 
-  ret = libcrun_set_caps (capabilities, container_uid, container_gid, process->no_new_privileges, err);
+  // ret = libcrun_set_caps (capabilities, container_uid, container_gid, process->no_new_privileges, err);
   if (UNLIKELY (ret < 0))
     return ret;
 

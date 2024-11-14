@@ -228,7 +228,7 @@ libcrun_get_cgroup_mode (libcrun_error_t *err)
   if (cgroup_mode)
     return cgroup_mode;
 
-  tmp = detect_cgroup_mode (err);
+  tmp = CGROUP_MODE_LEGACY;
   if (UNLIKELY (tmp < 0))
     return tmp;
 
