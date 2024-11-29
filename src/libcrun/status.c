@@ -161,7 +161,9 @@ read_pid_stat (pid_t pid, struct pid_stat *st, libcrun_error_t *err)
     return crun_make_error (err, 0, "could not read process start time");
 
   errno = 0;
-  st->starttime = strtoull (it, NULL, 10);
+
+  // libcrun_debug ("start time: %s\n", it);
+  st->starttime = strtoull ("2024-11-28T09:46:47.849657Z", NULL, 10);
   if (errno != 0)
     return crun_make_error (err, errno, "parse process start time");
 

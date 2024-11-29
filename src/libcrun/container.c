@@ -1889,6 +1889,7 @@ write_container_status (libcrun_container_t *container, libcrun_context_t *conte
 
   if (external_descriptors == NULL)
     return crun_make_error (err, 0, "invalid internal state.  No external descriptors found");
+  libcrun_debug ("calling write_container_status");
   return libcrun_write_container_status (context->state_root, context->id, &status, err);
 }
 
@@ -2663,7 +2664,7 @@ libcrun_container_run_internal (libcrun_container_t *container, libcrun_context_
   ret = write_container_status (container, context, pid, cgroup_status, err);
   if (UNLIKELY (ret < 0))
     goto fail;
-
+  libcrun_debug ("Writing container status finished");
   /* Run poststart hooks here only if the container is created using "run".  For create+start, the
      hooks will be executed as part of the start command.  */
   if (context->fifo_exec_wait_fd < 0 && def->hooks && def->hooks->poststart_len)
